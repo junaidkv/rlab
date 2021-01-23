@@ -1,0 +1,16 @@
+part-1
+
+> d <-
+dist(as.matrix(mtcars
+))
+> hc <- hclust(d)
+> plot(hc)
+
+
+part-2
+
+
+data <- dist(iris[,1:4])
+hcd <- as.dendrogram(hclust(data)) # Define nodePar
+nodePar <- list(lab.cex = 0.6, pch = c(20, 19), cex = 0.7, col = c("green","yellow"))
+plot(hcd, xlab = "Height", nodePar = nodePar, main = "Cluster dendrogram", edgePar = list(col = c("red","blue"), lwd = 2:1), horiz = TRUE)

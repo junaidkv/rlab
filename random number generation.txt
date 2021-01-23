@@ -1,0 +1,5 @@
+runif(1)
+runif(4)
+floor(runif(min=0,max=101))
+sample(1:100,3,replace=TRUE)
+sample(1:100,3,replace = FALSE)

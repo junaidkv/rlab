@@ -1,0 +1,28 @@
+library(shiny)
+ui <- fluidPage(
+# Application title
+titlePanel("Simple Calculator"),
+sidebarLayout(
+sidebarPanel(
+numericInput("num1","enter the first number",0),
+numericInput("num2","enter the second number",0),
+selectInput("operator","select the operator",
+choices=c("+","-","*","/"))
+),
+mainPanel(
+h2("Result:"),
+textOutput("output")
+)
+)
+)
+server <- function(input, output) {
+output$output <- renderText({
+switch(input$operator,
+"+"=input$num1 + input$num2,
+"-"=input$num1 - input$num2,
+"*"=input$num1 * input$num2,
+"/"=input$num1 / input$num2)
+})
+}
+# Run the application
+shinyApp(ui = ui, server = server)

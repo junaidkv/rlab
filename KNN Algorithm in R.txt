@@ -1,0 +1,23 @@
+#kNN Tutotrial on Iris Data Set#### library(class) #Has the knn function
+set.seed(4948493) #Set the seed for reproducibility #Sample the Iris data set (70% train,
+ 30% test) ir_sample<-sample(1:nrow(iris),size=nrow(iris)*.7) ir_train<-iris[ir_sample,]
+ #Select the 70% of rows ir_test<-iris[-ir_sample,] #Select the 30% of rows
+
+#First Attempt to Determine Right K#### iris_acc<-numeric() #Holding variable
+for(i in 1:50){
+#Apply knn with k = i
+predict<-knn(ir_train[,-5],ir_test[,-5], ir_train$Species,k=i)
+iris_acc<-c(iris_acc, mean(predict==ir_test$Species))
+}
+#Plot k= 1 through 30
+plot(1-iris_acc,type="l",ylab="Error Rate", xlab="K",main="Error Rate for Iris With Varying K")
+#Try many Samples of Iris Data Set to Validate K#### trial_sum<-numeric(20)
+trial_n<-numeric(20) set.seed(6033850) for(i in 1:100){
+ir_sample<-sample(1:nrow(iris),size=nrow(iris)*.7) ir_train<-iris[ir_sample,]
+ir_test<-iris[-ir_sample,] test_size<-nrow(ir_test) for(j in 1:20){
+predict<-knn(ir_train[,-5],ir_test[,-5], ir_train$Species,k=j)
+trial_sum[j]<-trial_sum[j]+sum(predict==ir_test$Species) trial_n[j]<-trial_n[j]+test_size
+}
+}
+plot(1-trial_sum / trial_n,type="l",ylab="Error Rate", xlab="K",main="Error Rate for Iris With
+Varying K (100 Samples)")

@@ -1,0 +1,15 @@
+#server library(shiny) library(shinydashboard) library(plotrix) shinyServer(function(input,output){
+output$histogram<-renderPlot({ hist(faithful$eruptions,breaks = input$bins)
+})
+output$bar<-renderPlot({ bar2<-tapply(mtcars$am,list(mtcars$gear),mean) barplot(bar2)
+})
+output$pie<-renderPlot({ c<-c(155,234,340,40,342) p<-c("India","China","UK","USA","England")
+pie3D(c,labels = p ,explode=input$bin,col=c("red","blue","green","yellow","orange")) })
+})
+#UI
+library(shiny)
+library(shinydashboard)
+shinyUI(
+dashboardPage(
+dashboardHeader(title = "ShinyTest"),dashboardSidebar(sidebarMenu(menuItem("Dashboard",tabName = "dashboard",icon = icon("dashboard")), menuSubItem("Histogram",tabName = "hist"), sliderInput("bins","Number of Breaks",1,10,5), menuSubItem("BarChart",tabName = "bar"), menuSubItem("Pie Chart",tabName = "pie"),sliderInput("bin","Number of Breaks",0,1,10))),dashboardBody(tabItems(tabItem(tabName="dashboard",h1("This is to Display DataForms")),tabItem(tabName = "hist",fluidRow(box(plotOutput("histogram")))),
+tabItem(tabName = "bar",fluidRow(box(plotOutput("bar")))),tabItem(tabName = "pie",fluidRow(box(plotOutput("pie"))))))))

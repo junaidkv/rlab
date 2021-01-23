@@ -1,0 +1,43 @@
+sub.exp <- expenditures %>% select(Division, State, X2007:X2011)
+head(sub.exp) # for brevity only display first 6 rows
+
+part-2
+
+sub.exp %>% filter(Division == 3)
+
+
+part-2
+
+group.exp <- sub.exp %>% group_by(Division)
+head(group.exp)
+
+part-3
+
+sub.exp %>% summarise(Mean_2011 = mean(X2011))
+
+
+part-4
+
+
+sub.exp %>%
+group_by(Division)%>%
+summarise(Mean_2010 = mean(X2010, na.rm=TRUE),
+Mean_2011 = mean(X2011, na.rm=TRUE)) %>%
+arrange(Mean_2011)
+
+
+part-4
+
+long.exp <- sub.exp %>%
+gather(Year, Expenditure, X2007:X2011) %>% # turn to long format
+separate(Year, into=c("x", "Year"), sep="X") %>% # separate "X" from year value
+select(-x)
+long.exp$Year <- as.numeric(long.exp$ Year) # convert from character to numeric
+head(long.exp)
+
+
+part- 5
+
+
+inflation_adj <- join.exp %>% mutate(Adj_Exp = Expenditure/Inflation)
+head(inflation_adj)

@@ -1,0 +1,16 @@
+#multiple choice qstions in english class
+
+exactly 4 correct answers
+dbinom(4,12,0.2)
+
+probability of having 4 or less answ
+dbinom(0,12,0.2)+
++dbinom(1,12,0.2)+
++dbinom(2,12,0.2)+
++dbinom(3,12,0.2)+
++dbinom(4,12,0.2)
+
+	OR
+
+pbinom(4,12,0.2)
+

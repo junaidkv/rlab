@@ -1,0 +1,6 @@
+x<-seq(0,8*pi,length.out=100)
+y1<-sin(x)
+y2<-cos(x)
+
+plot(x,y1,type="l", col="red")
+lines(x,y2,col="green")

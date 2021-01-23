@@ -1,0 +1,30 @@
+//Box Plot
+boxplot(mpg~cyl, data=mtcars, xlab="Number of Cylinders", ylab="Miles Per Gallon", main="Mileage Data")
+
+
+
+//Scatter Plot
+input<- mtcars[,c('wt','mpg')]
+print(head(input))
+#Plot the chart for cars with weight between 2.5 to 5 and mileage between 15 and 30. 
+plot(x=input$wt,y=input$mpg,xlab="Weight", ylab="Milage", xlim=c(2.5,5), ylim=c(15,30),main="Weight vs Milage")
+
+//Correl  Plot
+
+library(ggcorrplot)
+#Compute a correlation matrix data(mtcars)
+corr<-round(cor(mtcars), 1) head(corr[, 1:6])
+#Visualize the correlation matrix
+#--------------------------------
+#method="square" 
+(default) ggcorrplot(corr)
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,62 @@
+#install.packages("caret",dependencies=TRUE)
+#install.packages("randomForest")
+
+
+
+
+library("titanic")
+library(caret)
+library(randomForest)
+
+
+
+#Training dataset
+head(titanic_train)
+
+
+
+#testing dataset
+head(titanic_test)
+
+#cross-tabs between “Survived” and each other variable
+table(titanic_train[,c('Survived','Pclass')])
+
+
+#“conditional” box plots to compare the distribution of each continuous variable, conditioned on whether the passengers survived or not
+#install.packages("fields")
+library(fields)
+bplot.xy(titanic_train$Survived, titanic_train$Age)
+
+
+
+#if you summarize it, there are lots of NA’s. So, let’s exclude the variable Age, because it doesn’t have a big impact on Survived, and because the NA’s make it hard to work with.
+>summary(titanic_train$Age)
+
+
+#In the below boxplot, the boxplot for Fares are much different for those who survived and those who didn’t. Again, the y-axis is Fare and the x-axis is Survived.
+>bplot.xy(titanic_train$Survived, titanic_train$Fare)
+
+
+#On summarizing you’ll find that there are no NA’s for Fare. So, let’s include this variable.
+>summary(titanic_train$Fare)
+
+
+# Converting ‘Survived’ to a factor
+train$Survived <- factor(train$Survived)
+# Set a random seed
+set.seed(51)
+# Training using ‘random forest’ algorithm
+model <- train(Survived ~ Pclass + Sex + SibSp +
+Embarked + Parch + Fare, # Survived is a function of the variables we decided to include
+data = train, # Use the train data frame as the training data
+method = 'rf',# Use the 'random forest' algorithm
+trControl = trainControl(method = 'cv', # Use cross-validation
+number = 5) # Use 5 folds for cross-validation
+
+
+>summary(titanic_test)
+
+
+titanic_test$Fare<-ifelse(is.na(titanic_test$Fare), mean(titanic_test$Fare, na.rm=TRUE), titanic_test$Fare)
+titanic_test$Survived<-predict(model, newdata=titanic_test)
+titanic_test$Survived

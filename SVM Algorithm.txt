@@ -1,0 +1,13 @@
+# install.packages("tidyverse")
+library(tidyverse)
+library(e1071)
+set.seed(42) # To make our document recreatable
+data(iris)
+head(iris, 20)
+index <- c(1:nrow(iris))
+test.index <- sample(index, size = (length(index)/3))
+train <- iris[-test.index ,]
+test <- iris[test.index ,]
+svm.model.linear <- svm(Species ~ ., data = train, kernel = 'linear')
+svm.model.linear
+table(Prediction = predict(svm.model.linear, train),Truth = train$Species)

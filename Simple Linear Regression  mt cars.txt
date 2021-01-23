@@ -1,0 +1,6 @@
+Using mtcars dataset
+> model <- lm(mtcars$mpg ~ mtcars$cyl)
+> summary(model)
+Using visualization for mtcars dataset
+> plot(mtcars$mpg,mtcars$cyl,main="Scatterplot")
+> abline(model)

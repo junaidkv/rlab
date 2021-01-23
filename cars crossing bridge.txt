@@ -1,0 +1,7 @@
+#The probability of having sixteen or less cars crossing the bridge in a particular minute is given by the function ppois
+
+ppois(16,lambda=12)  #lower tail
+
+#probability of having seventeen or more cars crossing the bridge in a minute is in the upper tail of the probability density function
+
+ppois(16,lambda=12, lower=FALSE)  #upper tail

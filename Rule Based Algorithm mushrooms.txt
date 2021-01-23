@@ -1,0 +1,21 @@
+part -1
+
+mushrooms <- read.csv("C:/Users/dewdrops/Downloads/mushrooms.csv", stringsAsFactors = TRUE)
+str(mushrooms)
+
+part 2
+
+mushrooms$veil_type <- NULL
+table(mushrooms$class)
+
+part-3
+
+#install.packages("OneR")
+library(OneR)
+mushrooms_1R <- OneR(class ~ ., data = mushrooms)
+mushrooms_1R
+
+
+part-3
+
+summary(mushrooms_1R)

@@ -1,0 +1,55 @@
+menu<-read.csv("D:/Rlab/menu.csv")
+menu
+summary(menu)
+install.packages("ggplot2")
+library(ggplot2)
+ggplot()
+ggplot(data=menu)
+ggplot(data=menu) +geom_point(mapping = aes(x=Protein, y=Sugars))
+ggplot(data=menu) +geom_point(mapping = aes(x=Protein, y=Sugars, color=Category)) ggplot(data=menu) +geom_point(mapping = aes(x=Protein, y=Sugars, color=Category, size=Cholesterol))
+ggplot(data=menu, fig.height = 5) +geom_point(mapping = aes(x=Protein, y=Sugars, color=Category, size=Cholesterol , shape=Category)) #//GGPLOT geomlabel&text
+ggplot(data=menu) +geom_text(mapping = aes(x=Protein, y=Sugars, color=Category, label=Item))
+ggplot(data=menu) +geom_label(mapping = aes(x=Protein, y=Sugars, color=Category, label=Item))
+#ggplotgeom_bar(one variable)
+#1)
+ggplot(data=menu) +geom_bar(mapping = aes(x=Category))
+#2)
+ggplot(data=menu) +geom_bar(mapping = aes(x=Category, color=Category))
+#3)
+ggplot(data=menu) +geom_bar(mapping = aes(x=Category, fill=Category))
+#4)
+ggplot(data=menu) +geom_bar(mapping = aes(x=Category, fill=Category), color="slategrey")
+#ggplotgeom_historam
+#1)
+ggplot(data=menu) +geom_histogram(mapping = aes(x=Sugars))
+#2)
+ggplot(data=menu) +geom_histogram(mapping = aes(x=Sugars), fill="gold", color="orangered")
+#ggplotgeom_boxplot(ONE CONTINUOUS VARIABLE AND ONE CATEGORICAL
+VARIABLE)
+#1)
+ggplot(data=menu) +geom_boxplot(mapping = aes(x=Category, y=Sugars))
+#2)
+ggplot(data=menu) +geom_boxplot(mapping = aes(x=Category, y=Sugars))
++geom_point(mapping = aes(x=Category, y=Sugars))
+#ggplotgeom_violin
+#1)
+ggplot(data=menu, mapping = aes(x=Category, y=Protein)) +geom_violin()
+#2)
+ggplot(data=menu, mapping = aes(x=Category, y=Protein)) +geom_violin() +geom_point()
+#OTHER GGPLOT2 FUNCTIONS
+#1)
+p <- ggplot(menu, aes(Category, Sugars)) +
+geom_boxplot(color="red", fill="yellow", size=0.75) +geom_point(color="gray25") p
+#2)
+p + xlab("type of food") +ylab("sugar per serving (g)")
+#3)title,labels,subtitle
+p_with_text<- p +labs(x="type of food", y="sugar per serving (g)", title="Why McDonalds food isn't the healthiest option", subtitle="Especially if you want to avoid sugar",
+caption = "Figure 1: Distribution of sugar by category.Nice color scheme by the way ;)") p_with_text
+#4)themes
+p_with_text + theme_bw()
+p_with_text + theme_dark()
+#5)FACETING
+ggplot(menu, aes(Protein, Sugars, color=Category)) + geom_point() + theme_bw()
+ggplot(menu, aes(Protein, Sugars, color=Category)) + geom_point() + facet_wrap(~Category) + theme_bw()
+ggplot(menu, aes(Protein, Sugars)) + geom_point() + facet_wrap(~Category, scales="free")
++ theme_bw()
